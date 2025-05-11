@@ -39,11 +39,14 @@ const HomeScreen = () => {
       {/* <Category/> */}
       {/* product list */}
       <View style={{flexDirection:"row",
-        justifyContent:"space-between"
+   
+        
       }}>
         <ProductCart/>
         <ProductCart/>
+        
       </View>
+    
 
   </LinearGradient>
   )
