@@ -1,34 +1,52 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 
  
-
-function ProductCart() {
-//    const ProductCard = () => {
-//     const [isLiked, setIsLiked] = useState(false);
-   
-  return (
-   <View style={styles.container}>
-    <Image source={require("../assets/ttt.png")}
-        style={styles.coverImage}
-    />
-    <View>
-    <Text style={styles.title}>rrh</Text>
-    <Text style={styles.price}>$45</Text>
-    </View>
-    {/* <TouchableOpacity  onPress={()=> (!isLiked)}  style={styles.likeContainer}>
-        { isLiked ? (
-        <AntDesign name={"heart"} size={20} color={"#E55B5B"}/>
-        ):(
-         <AntDesign name={"hearto"} size={20} color={"#E55B5B"}/>
-        )    }
-    </TouchableOpacity> */}
-   </View>
-  )
+interface ProductCartProps {
+  item: {
+    image: string;
+    title: string;
+    price: number;
+  };
 }
-   
+
+function ProductCart({ item }: ProductCartProps) {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
+ const navigation = useNavigation<any>();
+  return (
+    <TouchableOpacity  onPress={()=> {
+      navigation.navigate("PRODUCT_DETAILS")
+    }} style={styles.container}>
+   <Image 
+  source={{ uri: item.image }}  // Wrapped in { uri: ... } for ImageSourcePropType
+  style={styles.coverImage}
+/>
+
+      <View>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.price}>${item.price}</Text>
+      </View>
+      <TouchableOpacity
+        onPress={toggleLike}
+        style={styles.likeContainer}
+      >
+        {isLiked ? (
+          <AntDesign name="heart" size={20} color="#E55B5B" />
+        ) : (
+          <AntDesign name="hearto" size={20} color="#E55B5B" />
+        )}
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
+}
+
    
 export default ProductCart
 

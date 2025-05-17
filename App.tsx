@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native'
+import { createStaticNavigation, NavigationContainer } from '@react-navigation/native'
 import React from 'react'
 import { Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -8,8 +8,11 @@ import Entypo from "react-native-vector-icons/Entypo";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ProductDetailsScreen from './src/screen/ProductDetailsScreen';
 
 const Tab = createBottomTabNavigator();
+const Stack  = createNativeStackNavigator();
  function  Home() {
   return (
     <View>
@@ -17,6 +20,18 @@ const Tab = createBottomTabNavigator();
     </View>
   );
  }
+
+ const MyHomeStack = () => {
+  return(
+    <Stack.Navigator  screenOptions={{
+      headerShown: false,
+    }
+    }>
+      <Stack.Screen name="HOME" component={HomeScreen} />
+     <Stack.Screen name="PRODUCT_DETAILS" component={ProductDetailsScreen} />
+    </Stack.Navigator>
+  );
+ };
 function App() {
   return (
    <NavigationContainer>
